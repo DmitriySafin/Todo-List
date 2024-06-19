@@ -1,0 +1,14 @@
+.task {
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow: hidden;
+  block-size: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.task__text {
+  display: inline-block;
+  max-inline-size: 165px;
+  opacity: 0.4;
+}
