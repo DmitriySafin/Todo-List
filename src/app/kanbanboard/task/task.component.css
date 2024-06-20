@@ -12,3 +12,17 @@
   max-inline-size: 165px;
   opacity: 0.4;
 }
+.task__info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+.task__add {
+  inline-size: 40px;
+  block-size: 40px;
+  background-color: #faf0f0;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+}

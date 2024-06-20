@@ -1,9 +1,11 @@
-<template class="task"> <ul class="task__item"></ul></template>
+<template> <li class="task__item"></li></template>
 <!-- Логика такая в этот тепмлейт подгружать задачи из local storage -->
 <div class="card__task task">
+  <ul class="task__list"></ul>
   <div class="task__info">
     <span class="task__text"
       >Drag your tasks here or preess + to add new tasks</span
     >
+    <button class="task__add">+</button>
   </div>
 </div>

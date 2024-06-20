@@ -4,12 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { SectiontodoComponent } from './sectiontodo/sectiontodo.component';
-import { TaskComponent } from './task/task.component';
+import { SectiontodoComponent } from './kanbanboard/sectiontodo/sectiontodo.component';
+import { KanbanboardModule } from './kanbanboard/kanbanboard.module';
 
 @NgModule({
-  declarations: [AppComponent, SectiontodoComponent, TaskComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, KanbanboardModule],
   providers: [],
   bootstrap: [AppComponent, SectiontodoComponent],
 })
