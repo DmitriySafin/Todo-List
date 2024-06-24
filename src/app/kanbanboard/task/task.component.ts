@@ -9,7 +9,7 @@ export interface Task {
   status: TaskStatus;
 }
 
-enum TaskStatus {
+export enum TaskStatus {
   Idea = 'Idea',
   ToDo = 'To-Do',
   InProgress = 'In Progress',

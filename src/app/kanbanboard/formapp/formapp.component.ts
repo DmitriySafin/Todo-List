@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
+import { TaskStatus } from '../task/task.component';
 
 interface FormAppInterface {
   showTaskForm: boolean;
   taskDescription: string;
   task: object;
+  taskStatus: TaskStatus;
 }
 
 @Component({
@@ -16,6 +18,7 @@ export class FormappComponent
   extends LocalStorageService
   implements FormAppInterface
 {
+  taskStatus: TaskStatus = TaskStatus.ToDo;
   showTaskForm: boolean = false;
   taskDescription: string = '';
   task: object = {};
@@ -35,9 +38,16 @@ export class FormappComponent
   }
 
   addTask(): void {
-    this.task = { description: this.taskDescription };
-    this.setItem('task', this.task);
+    this.task = {
+      description: this.taskDescription,
+      status: this.taskStatus,
+    };
+
+    const tasks = this.getItem('tasks') || [];
+    tasks.push(this.task);
+    this.setItem('tasks', tasks);
+
     this.taskDescription = '';
-    this.closeForm();
+    this.showTaskForm = false;
   }
 }
