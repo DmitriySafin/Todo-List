@@ -7,11 +7,6 @@
   align-items: center;
   justify-content: center;
 }
-.task__text {
-  display: inline-block;
-  max-inline-size: 165px;
-  opacity: 0.4;
-}
 .task__info {
   display: flex;
   flex-direction: column;

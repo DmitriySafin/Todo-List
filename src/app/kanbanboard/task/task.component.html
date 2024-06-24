@@ -1,11 +1,31 @@
-<template> <li class="task__item"></li></template>
+<template>
+  <li class="task__item">
+    <article class="task__card">
+      <span class="task__title">{{ title }}</span>
+      <time datetime="">{{ deadline }}</time>
+      <div class="task__description">
+        <p class="task__decription-text">{{ description }}</p>
+      </div>
+      <div class="task__btns">
+        <button class="task__edit">
+          <img
+            src="../../../assets/images-svg/edit.svg"
+            alt="Иконка редактирования"
+          />
+        </button>
+        <button class="task__delete">
+          <img
+            src="../../../assets/images-svg/basket.svg"
+            alt="Иконка удаления"
+          />
+        </button>
+      </div>
+    </article></li
+></template>
 <!-- Логика такая в этот тепмлейт подгружать задачи из local storage -->
 <div class="card__task task">
   <ul class="task__list"></ul>
   <div class="task__info">
-    <span class="task__text"
-      >Drag your tasks here or preess + to add new tasks</span
-    >
-    <button class="task__add">+</button>
+    <app-formapp></app-formapp>
   </div>
 </div>

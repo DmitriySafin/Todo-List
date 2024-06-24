@@ -1,0 +1,28 @@
+.task__add {
+  cursor: pointer;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+.from__info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+.info__text {
+  display: inline-block;
+  max-inline-size: 165px;
+  opacity: 0.4;
+}
+.form__textarea {
+  width: 90%;
+  height: 200px;
+  resize: none;
+  border: 3px solid black;
+}
+.form__add {
+}
