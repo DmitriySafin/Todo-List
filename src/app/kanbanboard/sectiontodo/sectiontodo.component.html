@@ -2,40 +2,40 @@
   <nav>
     <ul class="todo__item">
       <li class="todo__list">
-        <article class="todo__card card">
-          <div class="card__head todo__card--orange">
-            <p class="todo__info">Idea</p>
-            <span class="todo__count">0</span>
+        <article class="todo__card card todo__card--orange">
+          <div class="card__head">
+            <p class="todo__info">{{ TaskStatus.Idea }}</p>
+            <span class="todo__count">{{ ideaCount }}</span>
           </div>
-          <app-task></app-task>
         </article>
+        <app-task></app-task>
       </li>
       <li class="todo__list">
-        <article class="todo__card card">
-          <div class="card__head todo__card--red">
-            <p class="todo__info">To do</p>
-            <span class="todo__count">0</span>
+        <article class="todo__card card todo__card--red">
+          <div class="card__head">
+            <p class="todo__info">{{ TaskStatus.ToDo }}</p>
+            <span class="todo__count">{{ toDoCount }}</span>
           </div>
-          <app-task></app-task>
         </article>
+        <app-task></app-task>
       </li>
       <li class="todo__list">
-        <article class="todo__card card">
-          <div class="card__head todo__card--blue">
-            <p class="todo__info">In process</p>
-            <span class="todo__count">0</span>
+        <article class="todo__card card todo__card--blue">
+          <div class="card__head">
+            <p class="todo__info">{{ TaskStatus.InProgress }}</p>
+            <span class="todo__count">{{ inProgressCount }}</span>
           </div>
-          <app-task></app-task>
         </article>
+        <app-task></app-task>
       </li>
       <li class="todo__list">
-        <article class="todo__card card">
-          <div class="card__head todo__card--green">
-            <p class="todo__info">Done</p>
-            <span class="todo__count">0</span>
+        <article class="todo__card card todo__card--green">
+          <div class="card__head">
+            <p class="todo__info">{{ TaskStatus.Done }}</p>
+            <span class="todo__count">{{ doneCount }}</span>
           </div>
-          <app-task></app-task>
         </article>
+        <app-task></app-task>
       </li>
     </ul>
   </nav>

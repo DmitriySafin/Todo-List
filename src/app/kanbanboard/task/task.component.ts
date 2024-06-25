@@ -6,14 +6,6 @@ export interface Task {
   title: string;
   description: string;
   deadline: Date;
-  status: TaskStatus;
-}
-
-export enum TaskStatus {
-  Idea = 'Idea',
-  ToDo = 'To-Do',
-  InProgress = 'In Progress',
-  Done = 'Done',
 }
 
 @Component({
@@ -26,7 +18,6 @@ export class TaskComponent extends FormappComponent implements Task {
   title: string;
   description: string;
   deadline: Date;
-  status: TaskStatus;
 
   constructor() {
     super();
@@ -34,6 +25,8 @@ export class TaskComponent extends FormappComponent implements Task {
     this.title = '';
     this.description = '';
     this.deadline = new Date();
-    this.status = TaskStatus.Idea;
+  }
+  renderTask() {
+    const list = document.querySelector('task__list');
   }
 }
