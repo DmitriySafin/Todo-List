@@ -21,6 +21,8 @@ export class SectiontodoComponent extends LocalStorageService {
   doneCount: number = 0;
 
   addTask(status: TaskStatus) {
+    const countTask = this.getItem('tasks');
+
     switch (status) {
       case TaskStatus.Idea:
         this.getItem;
