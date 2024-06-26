@@ -5,27 +5,41 @@
   block-size: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
 }
-.task__info {
+.task__list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  align-items: center;
+  gap: 20px;
+  inline-size: 100%;
 }
-.task__add {
-  inline-size: 40px;
-  block-size: 40px;
-  background-color: #faf0f0;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
+.task__item {
+  inline-size: 100%;
+}
+.task__card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 15px;
 }
 
+.task__title {
+  font-size: 18px;
+  font-weight: bold;
+}
 .task__btns {
   display: flex;
   gap: 5px;
+  justify-content: flex-end;
 }
+.task__description {
+  max-inline-size: 250px;
+  margin-block-start: 20px;
+  margin-block-end: 20px;
+}
+
 .task__edit {
   background-color: transparent;
   border: none;

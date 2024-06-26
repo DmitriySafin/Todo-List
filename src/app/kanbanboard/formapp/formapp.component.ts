@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
+import { count } from 'rxjs';
 
 interface FormAppInterface {
   showTaskForm: boolean;
@@ -35,14 +36,24 @@ export class FormappComponent
   }
 
   addTask(): void {
-    this.task = {
+    const tasks = this.getItem('tasks') || [];
+    const taskId = `${tasks.length + 1}`;
+    const taskSection = 'MySection';
+    const deadline = new Date();
+    const count = taskId;
+
+    // Создаем новую задачу с требуемыми ключами
+    const newTask = {
+      id: taskId,
+      section: taskSection,
       description: this.taskDescription,
+      taskNumber: `Todo ${tasks.length + 1}`,
+      deadline: deadline,
+      count: count,
     };
 
-    const tasks = this.getItem('tasks') || [];
-    tasks.push(this.task);
+    tasks.push(newTask);
     this.setItem('tasks', tasks);
-
     this.taskDescription = '';
     this.closeForm();
   }

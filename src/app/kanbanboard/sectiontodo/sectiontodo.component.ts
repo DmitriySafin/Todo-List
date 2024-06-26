@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
+import { FormappComponent } from '../formapp/formapp.component';
 
 export enum TaskStatus {
   Idea = 'Idea',
@@ -13,14 +14,14 @@ export enum TaskStatus {
   templateUrl: './sectiontodo.component.html',
   styleUrls: ['./sectiontodo.component.css'],
 })
-export class SectiontodoComponent extends LocalStorageService {
+export class SectiontodoComponent extends FormappComponent {
   TaskStatus = TaskStatus;
   ideaCount: number = 0;
   toDoCount: number = 0;
   inProgressCount: number = 0;
   doneCount: number = 0;
 
-  addTask(status: TaskStatus) {
+  addTas(status: TaskStatus) {
     const countTask = this.getItem('tasks');
 
     switch (status) {

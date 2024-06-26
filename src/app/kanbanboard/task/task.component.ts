@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
-import { FormappComponent } from '../formapp/formapp.component';
+import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
 
 export interface Task {
-  id: number;
-  title: string;
-  description: string;
+  count: string;
   deadline: Date;
+  description: string;
+  id: string;
+  section: string;
+  taskNumber: string;
 }
 
 @Component({
@@ -14,43 +15,25 @@ export interface Task {
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css'],
 })
-export class TaskComponent extends LocalStorageService implements Task {
+export class TaskComponent extends LocalStorageService implements OnInit {
   tasks: Task[] = [];
-  id: number;
-  title: string;
-  description: string;
-  deadline: Date;
 
-  constructor() {
-    super();
-    this.id = 0;
-    this.title = '';
-    this.description = '';
-    this.deadline = new Date();
-  }
   ngOnInit() {
     this.renderTasks();
   }
+
   renderTasks() {
-    this.tasks = this.getItem('tasks');
-    console.log(this.tasks);
-
-    this.tasks.map((task) => {
-      const deadline = new Date(task.deadline);
-      const day = deadline.getDate();
-      const month = deadline.getMonth() + 1;
-      const year = deadline.getFullYear();
-      const formattedDeadline = `${day} ${month} ${year}`;
-
-      // Добавляем новые ключи к объекту задачи
-      // const updatedTask = {
-      //   ...this.tasks,
-      //   deadline: formattedDeadline,
-      //   this.id: 'значение1',
-      //   newKey2: 'значение2',
-      // };
-
-      // return updatedTask;
-    });
+    this.tasks = this.getItem('tasks') || [];
   }
+
+  // removeTask(taskId: string) {
+  //   const updatedTasks = this.tasks.filter((task: Task) => task.id !== taskId);
+  //   this.setItem('tasks', updatedTasks);
+  //   this.tasks = updatedTasks;
+  // }
+
+  // addTask(newTask: Task) {
+  //   this.tasks.push(newTask);
+  //   this.setItem('tasks', this.tasks);
+  // }
 }
