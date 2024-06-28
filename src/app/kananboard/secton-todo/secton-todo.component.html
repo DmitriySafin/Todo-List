@@ -1,0 +1,13 @@
+<div class="section">
+  <nav class="section__task">
+    <ul class="section__item">
+      <li *ngFor="let section of sections" class="section__list">
+        <article class="section__card">
+          <p class="section__title">{{ section.title }}</p>
+          <span class="section__count">0</span>
+        </article>
+        <app-taskapp> </app-taskapp>
+      </li>
+    </ul>
+  </nav>
+</div>

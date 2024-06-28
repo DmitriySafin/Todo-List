@@ -1,3 +1,6 @@
+.form {
+  margin-block-start: 15px;
+}
 .task__add {
   cursor: pointer;
 }
@@ -7,7 +10,7 @@
   gap: 10px;
   justify-content: center;
 }
-.from__info {
+.form__info {
   display: flex;
   flex-direction: column;
   gap: 15px;

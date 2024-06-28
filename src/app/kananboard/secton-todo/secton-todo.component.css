@@ -1,0 +1,21 @@
+.section {
+}
+.section__task {
+}
+.section__item {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.section__list {
+}
+.section__card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid black;
+}
+.section__title {
+}
+.section__count {
+}

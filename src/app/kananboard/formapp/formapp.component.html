@@ -1,0 +1,18 @@
+<div class="form">
+  <div class="form__info info" *ngIf="!showTaskForm">
+    <span class="info__text"
+      >Drag your tasks here or press + to add new tasks</span
+    >
+    <button (click)="showForm()" class="task__add">+</button>
+  </div>
+  <form *ngIf="showTaskForm" class="form">
+    <textarea
+      class="form__textarea"
+      name="taskDescription"
+      id=""
+      [(ngModel)]="taskDescription"
+    ></textarea>
+    <button class="form__add">Добавить задачу</button>
+    <button (click)="closeForm()" class="form__close">Закрыть</button>
+  </form>
+</div>
