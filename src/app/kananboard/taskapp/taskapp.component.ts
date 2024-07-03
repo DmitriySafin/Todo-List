@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface Task {
   id: number;
-  status: any;
+  status: string;
   deadline: Date;
   description: string;
   taskNumber: string;
@@ -14,6 +14,7 @@ export interface Task {
   styleUrl: './taskapp.component.css',
 })
 export class TaskappComponent {
-  @Input() task: Task | undefined;
-  @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Input() task: Task | undefined; // получает
+
+  @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>(); // отдаёт
 }

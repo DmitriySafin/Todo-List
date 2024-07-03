@@ -12,7 +12,7 @@
       id=""
       [(ngModel)]="taskDescription"
     ></textarea>
-    <button class="form__add">Добавить задачу</button>
+    <button (click)="prepearTask()" class="form__add">Добавить задачу</button>
     <button (click)="closeForm()" class="form__close">Закрыть</button>
   </form>
 </div>

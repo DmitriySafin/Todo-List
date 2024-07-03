@@ -16,7 +16,7 @@ export interface Section {
 @Component({
   selector: 'app-secton-todo',
   templateUrl: './secton-todo.component.html',
-  styleUrl: './secton-todo.component.css',
+  styleUrls: ['./secton-todo.component.css'],
   providers: [LocalStorageService],
 })
 export class SectonTodoComponent implements OnInit {
@@ -29,12 +29,15 @@ export class SectonTodoComponent implements OnInit {
     // Перебираем все ключи перечисления TaskStatus
     Object.values(TaskStatus).forEach((status: TaskStatus) => {
       // Создаем новую секцию с задачами по ключу TaskStatus
-      const tasksForStatus = this.localStorageService.getItem(status) || [];
+      const tasksForStatus =
+        (this.localStorageService.getItem(status) as Task[]) || [];
       this.sections.push({
         title: status,
         tasks: tasksForStatus,
       });
     });
+    console.log(this.sections);
+    console.log(this.saveTask);
   }
   // Реализовать сохранение задачи в нужноую секцию в локальном хранилище
   saveTaskSection(task: Task) {
@@ -56,13 +59,23 @@ export class SectonTodoComponent implements OnInit {
     }
   }
   // Метод  для добавления задачи в указанную секцию:
-  addTaskInSection(event: Task) {
-    this.sections.forEach((section) => {
-      if (section.title === event.status) {
-        section.tasks.push(event);
-      }
-    });
+  addTaskInSection(task: Task) {
+    // Находим нужную секцию по статусу задачи
+    const section = this.sections.find((sec) => sec.title === task.status);
 
-    this.localStorageService.setItem('sections', this.sections);
+    if (section) {
+      const newTask: Task = {
+        id: task.id,
+        status: task.status,
+        deadline: task.deadline,
+        description: task.description,
+        taskNumber: task.taskNumber,
+      };
+
+      section.tasks.push(newTask);
+
+      // Сохраняем обновленные секции в локальное хранилище
+      this.localStorageService.setItem('sections', this.sections);
+    }
   }
 }
