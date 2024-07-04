@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
-import { Task, TaskappComponent } from '../taskapp/taskapp.component';
+import { Task } from '../taskapp/taskapp.component';
 
 interface FormAppInterface {
   showTaskForm: boolean;
@@ -17,7 +17,7 @@ export class FormappComponent implements FormAppInterface {
   @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>();
   showTaskForm: boolean = false;
   taskDescription: string = '';
-
+  newTask: Task | undefined;
   constructor(private localStorageService: LocalStorageService) {}
 
   showForm(): void {
@@ -29,25 +29,33 @@ export class FormappComponent implements FormAppInterface {
   }
 
   prepearTask() {
-    // По заполненым подям формы создать объект Task
-    const tasks = this.localStorageService.getItem('sections');
-    console.log(tasks);
+    const sections = this.localStorageService.getItem('sections') || [];
 
-    const newTask = {
-      id: tasks.tasks.length + 1,
-      status: tasks.title,
-      deadline: new Date(),
-      description: this.taskDescription,
-      taskNumber: `Todo ${tasks.tasks.length + 1}`,
-    };
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
 
-    // И передать в SaveTask  this.saveTask.emit(созданный объект Task)
-    this.saveTask.emit(newTask);
-    // Очистка поля с описанием задачи
+      const newTask: Task = {
+        id: section.tasks.length + 1,
+        status: section.title,
+        deadline: new Date(),
+        description: this.taskDescription,
+        taskNumber: `Task ${section.tasks.length + 1}`,
+      };
+
+      section.tasks.push(newTask);
+      this.saveTask.emit(newTask);
+      // Обновляем секцию в массиве
+      sections[i] = section;
+    }
+
+    // Обновляем список секций в локальном хранилище
+    this.localStorageService.setItem('sections', sections);
+
+    // Очищаем поле с описанием задачи
     this.taskDescription = '';
 
-    // Закрытие формы после сохранения задачи
+    // Закрываем форму после сохранения задачи
     this.closeForm();
-    //
   }
 }
+//

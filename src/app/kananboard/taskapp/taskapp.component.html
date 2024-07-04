@@ -3,7 +3,7 @@
     <li class="task__item">
       <article class="task__card">
         <span class="task__title">{{ task?.taskNumber }}</span>
-        <time datetime="">{{ task?.deadline | date }}</time>
+        <time>{{ task?.deadline | date : "dd/MM/yyyy" }}</time>
         <div class="task__description">
           <p class="task__decription-text">{{ task?.description }}</p>
         </div>

@@ -35,9 +35,8 @@ export class SectonTodoComponent implements OnInit {
         title: status,
         tasks: tasksForStatus,
       });
+      this.localStorageService.setItem('sections', this.sections);
     });
-    console.log(this.sections);
-    console.log(this.saveTask);
   }
   // Реализовать сохранение задачи в нужноую секцию в локальном хранилище
   saveTaskSection(task: Task) {
@@ -59,23 +58,23 @@ export class SectonTodoComponent implements OnInit {
     }
   }
   // Метод  для добавления задачи в указанную секцию:
-  addTaskInSection(task: Task) {
-    // Находим нужную секцию по статусу задачи
-    const section = this.sections.find((sec) => sec.title === task.status);
+  // addTaskInSection(task: Task) {
+  //   // Находим нужную секцию по статусу задачи
+  //   const section = this.sections.find((sec) => sec.title === task.status);
 
-    if (section) {
-      const newTask: Task = {
-        id: task.id,
-        status: task.status,
-        deadline: task.deadline,
-        description: task.description,
-        taskNumber: task.taskNumber,
-      };
+  //   if (section) {
+  //     const newTask: Task = {
+  //       id: task.id,
+  //       status: task.status,
+  //       deadline: task.deadline,
+  //       description: task.description,
+  //       taskNumber: task.taskNumber,
+  //     };
 
-      section.tasks.push(newTask);
+  //     section.tasks.push(newTask);
 
-      // Сохраняем обновленные секции в локальное хранилище
-      this.localStorageService.setItem('sections', this.sections);
-    }
-  }
+  //     // Сохраняем обновленные секции в локальное хранилище
+  //     this.localStorageService.setItem('sections', this.sections);
+  //   }
+  // }
 }
