@@ -32,12 +32,13 @@ export class FormappComponent implements FormAppInterface {
 
   prepearTask() {
     const newTask: Task = {
-      id: this.section?.tasks.length || 0 + 1,
+      id: (this.section?.tasks.length || 0) + 1, // изменение в этой строке
       status: this.section?.title || '',
       deadline: new Date(),
       description: this.taskDescription,
-      taskNumber: `Task ${this.section?.tasks.length || 0 + 1}`,
+      taskNumber: `Task ${(this.section?.tasks.length || 0) + 1}`, // также изменяем здесь
     };
+    console.log(this.section?.tasks.length);
 
     this.saveTask.emit(newTask);
 

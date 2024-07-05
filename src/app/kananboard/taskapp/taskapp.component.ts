@@ -18,4 +18,13 @@ export interface Task {
 export class TaskappComponent {
   @Input() task: Task | undefined; // получает
   @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>(); // отдаёт
+  @Output() deleteTask: EventEmitter<number> = new EventEmitter<number>();
+
+  onDeleteTask() {
+    if (this.task && this.task.id) {
+      this.deleteTask.emit(this.task.id); // Отправляем id задачи для удаления из локального хранилища
+    } else {
+      console.log('Задача не была добавлена на страницу, нечего удалять.');
+    }
+  }
 }

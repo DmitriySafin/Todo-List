@@ -55,11 +55,27 @@ export class SectonTodoComponent implements OnInit {
       if (taskIndex === -1) {
         // Добавляем задачу в найденную секцию
         section.tasks.push(task);
-        // Сохраняем обновленные секции в локальное хранилище
-        this.localStorageService.setItem('sections', this.sections);
+      } else {
+        // Если такой id уже то это плохо вылетит в консоле
+        console.log('Задача с таким id уже существует в данной секции.');
       }
+
+      // this.deleteTaskFromSection(task.id);
+      // Сохраняем обновленные секции в локальное хранилище
+      this.localStorageService.setItem('sections', this.sections);
     }
   }
-}
 
-// Найти
+  deleteTaskFromSection(taskId: number) {
+    this.sections.forEach((section) => {
+      // Если задача с переданным id найдена в текущей секции, то выполняем следующее:
+      const taskIndex = section.tasks.findIndex((task) => task.id === taskId);
+      if (taskIndex !== -1) {
+        section.tasks.splice(taskIndex, 1); // Удаляем задачу из секции
+      }
+    });
+
+    // Сохраняем обновленные секции в локальное хранилище
+    this.localStorageService.setItem('sections', this.sections);
+  }
+}
