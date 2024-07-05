@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LocalStorageService } from '../../core/local-storage.service';
 import { Task } from '../taskapp/taskapp.component';
+import { Section } from '../secton-todo/secton-todo.component';
 
 interface FormAppInterface {
   showTaskForm: boolean;
@@ -14,6 +15,7 @@ interface FormAppInterface {
   providers: [LocalStorageService],
 })
 export class FormappComponent implements FormAppInterface {
+  @Input() section: Section | undefined;
   @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>();
   showTaskForm: boolean = false;
   taskDescription: string = '';
@@ -29,27 +31,15 @@ export class FormappComponent implements FormAppInterface {
   }
 
   prepearTask() {
-    const sections = this.localStorageService.getItem('sections') || [];
+    const newTask: Task = {
+      id: this.section?.tasks.length || 0 + 1,
+      status: this.section?.title || '',
+      deadline: new Date(),
+      description: this.taskDescription,
+      taskNumber: `Task ${this.section?.tasks.length || 0 + 1}`,
+    };
 
-    for (let i = 0; i < sections.length; i++) {
-      const section = sections[i];
-
-      const newTask: Task = {
-        id: section.tasks.length + 1,
-        status: section.title,
-        deadline: new Date(),
-        description: this.taskDescription,
-        taskNumber: `Task ${section.tasks.length + 1}`,
-      };
-
-      section.tasks.push(newTask);
-      this.saveTask.emit(newTask);
-      // Обновляем секцию в массиве
-      sections[i] = section;
-    }
-
-    // Обновляем список секций в локальном хранилище
-    this.localStorageService.setItem('sections', sections);
+    this.saveTask.emit(newTask);
 
     // Очищаем поле с описанием задачи
     this.taskDescription = '';

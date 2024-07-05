@@ -21,25 +21,28 @@ export interface Section {
 })
 export class SectonTodoComponent implements OnInit {
   sections: Section[] = [];
-  @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>();
 
   constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit(): void {
-    // Перебираем все ключи перечисления TaskStatus
-    Object.values(TaskStatus).forEach((status: TaskStatus) => {
-      // Создаем новую секцию с задачами по ключу TaskStatus
-      const tasksForStatus =
-        (this.localStorageService.getItem(status) as Task[]) || [];
-      this.sections.push({
-        title: status,
-        tasks: tasksForStatus,
+    const sectionSaved =
+      (this.localStorageService.getItem('sections') as Section[]) || [];
+    if (sectionSaved.length > 0) {
+      this.sections.push(...sectionSaved);
+    } else {
+      const localSection: Section[] = [];
+      // Перебираем все ключи перечисления TaskStatus
+      Object.values(TaskStatus).forEach((status: TaskStatus) => {
+        // Создаем новую секцию с задачами по ключу TaskStatus
+        localSection.push({ title: status, tasks: [] });
       });
-      this.localStorageService.setItem('sections', this.sections);
-    });
+      this.localStorageService.setItem('sections', localSection);
+    }
   }
   // Реализовать сохранение задачи в нужноую секцию в локальном хранилище
   saveTaskSection(task: Task) {
+    console.log(task);
+
     // Находим нужную секцию по статусу задачи
     const section = this.sections.find(
       (section) => section.title === task.status
@@ -47,34 +50,16 @@ export class SectonTodoComponent implements OnInit {
 
     // Если секция с таким статусом найдена
     if (section) {
-      // Добавляем задачу в найденную секцию
-      section.tasks.push(task);
-
-      // Сохраняем обновленные секции в локальное хранилище
-      this.localStorageService.setItem('sections', this.sections);
-
-      // Генерируем событие сохранения задачи
-      this.saveTask.emit(task);
+      // Проверяем, не содержится ли уже данная задача в найденной секции
+      const taskIndex = section.tasks.findIndex((t) => t.id === task.id);
+      if (taskIndex === -1) {
+        // Добавляем задачу в найденную секцию
+        section.tasks.push(task);
+        // Сохраняем обновленные секции в локальное хранилище
+        this.localStorageService.setItem('sections', this.sections);
+      }
     }
   }
-  // Метод  для добавления задачи в указанную секцию:
-  // addTaskInSection(task: Task) {
-  //   // Находим нужную секцию по статусу задачи
-  //   const section = this.sections.find((sec) => sec.title === task.status);
-
-  //   if (section) {
-  //     const newTask: Task = {
-  //       id: task.id,
-  //       status: task.status,
-  //       deadline: task.deadline,
-  //       description: task.description,
-  //       taskNumber: task.taskNumber,
-  //     };
-
-  //     section.tasks.push(newTask);
-
-  //     // Сохраняем обновленные секции в локальное хранилище
-  //     this.localStorageService.setItem('sections', this.sections);
-  //   }
-  // }
 }
+
+// Найти

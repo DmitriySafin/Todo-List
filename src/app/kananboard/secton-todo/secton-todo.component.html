@@ -6,11 +6,17 @@
           <p class="section__title">{{ section.title }}</p>
           <span class="section__count">0</span>
         </article>
-        <app-taskapp> </app-taskapp>
+        <app-taskapp
+          *ngFor="let task of section.tasks"
+          [task]="task"
+          (saveTask)="saveTaskSection($event)"
+        >
+        </app-taskapp>
+        <app-formapp
+          [section]="section"
+          (saveTask)="saveTaskSection($event)"
+        ></app-formapp>
       </li>
     </ul>
   </nav>
 </div>
-<!--     *ngFor="let task of section.tasks"
-          [task]="task"
-          (saveTask)="saveTaskSection($event)"   -->

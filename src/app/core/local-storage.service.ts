@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Task } from 'zone.js/lib/zone-impl';
 
 @Injectable({
   providedIn: 'root',
