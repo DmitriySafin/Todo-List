@@ -8,7 +8,7 @@
           <p class="task__decription-text">{{ task?.description }}</p>
         </div>
         <div class="task__btns">
-          <button class="task__edit">
+          <button (click)="onEditOpenTask()" class="task__edit">
             <img
               src="../../../assets/images-svg/edit.svg"
               alt="Иконка редактирования"
@@ -24,7 +24,14 @@
           </button>
         </div>
       </article>
-      <!-- нет понимания что здесь происходит -->
+      <div *ngIf="isEditing" class="task__edit-form">
+        <textarea
+          [(ngModel)]="editingTaskDescription"
+          placeholder="Описание"
+        ></textarea>
+        <button (click)="onSaveEdit()">Сохранить</button>
+        <button (click)="onCancelEdit()">Отмена</button>
+      </div>
     </li>
   </ul>
 </div>

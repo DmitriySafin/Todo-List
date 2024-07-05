@@ -54,3 +54,14 @@
   inline-size: 15px;
   block-size: 15px;
 }
+
+.task__edit-form {
+  margin-top: 20px;
+}
+
+#edit__decription {
+  width: 90%;
+  height: 200px;
+  resize: none;
+  border: 3px solid black;
+}

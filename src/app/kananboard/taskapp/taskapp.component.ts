@@ -16,15 +16,35 @@ export interface Task {
   providers: [LocalStorageService],
 })
 export class TaskappComponent {
-  @Input() task: Task | undefined; // получает
-  @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>(); // отдаёт
-  @Output() deleteTask: EventEmitter<number> = new EventEmitter<number>();
+  @Input() task: Task | undefined;
+  @Output() saveTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() deleteTask: EventEmitter<Task> = new EventEmitter<Task>();
+  @Output() editTask: EventEmitter<Task> = new EventEmitter<Task>();
+  editingTaskDescription: string = ''; // Используем для хранения временного значения описания задачи
+  isEditing: boolean = false;
 
   onDeleteTask() {
-    if (this.task && this.task.id) {
-      this.deleteTask.emit(this.task.id); // Отправляем id задачи для удаления из локального хранилища
-    } else {
-      console.log('Задача не была добавлена на страницу, нечего удалять.');
+    if (this.task) {
+      this.deleteTask.emit(this.task); // Отправляем объект задачи для удаления
+    }
+  }
+
+  onEditOpenTask() {
+    if (this.task) {
+      this.editingTaskDescription = this.task.description; // Запоминаем текущее значение описания задачи
+      this.isEditing = true;
+    }
+  }
+
+  onCancelEdit() {
+    this.isEditing = false;
+  }
+
+  onSaveEdit() {
+    if (this.task) {
+      this.task.description = this.editingTaskDescription; // Присваиваем временное значение обратно в задачу
+      this.editTask.emit(this.task); // Отправляем измененную задачу на сохранение
+      this.isEditing = false;
     }
   }
 }
